@@ -24,8 +24,6 @@ public class BaseActivity extends AppCompatActivity {
     protected LinearLayout baseToolbar;
     protected TextView baseTitleTV;
 
-    
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
