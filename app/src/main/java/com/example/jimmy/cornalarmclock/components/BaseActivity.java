@@ -1,0 +1,73 @@
+package com.example.jimmy.cornalarmclock.components;
+
+import android.app.Application;
+import android.content.Context;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.example.jimmy.cornalarmclock.R;
+import com.example.jimmy.cornalarmclock.util.ActivityStack;
+
+import butterknife.ButterKnife;
+
+/**
+ * Created by Jimmy on 16/7/7.
+ */
+public class BaseActivity extends AppCompatActivity {
+
+    protected Application mApplication;
+    protected LinearLayout baseToolbar;
+    protected TextView baseTitleTV;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setView();
+        ButterKnife.bind(this);
+        mApplication = this.getApplication();
+        ActivityStack.getInstance().add(this);
+    }
+
+    protected void setView() {
+        setContentView(R.layout.activity_base);
+        for (Class c = this.getClass(); c != Context.class; c = c.getSuperclass()) {
+            ContentView annotation = (ContentView) c.getAnnotation(ContentView.class);
+            if (annotation != null) {
+                View content = null;
+
+                try {
+                    content = LayoutInflater.from(this).inflate(annotation.value(), null);
+                } catch (RuntimeException e) {
+                    e.printStackTrace();
+                }
+                LinearLayout ll = (LinearLayout) findViewById(R.id.ll_base);
+                ll.addView(content, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                return;
+            }
+        }
+
+    }
+
+    private void initActionBar() {
+        baseToolbar = (LinearLayout) findViewById(R.id.toolbar_base);
+        baseTitleTV = (TextView) findViewById(R.id.txt_base);
+        baseTitleTV.setText(getTitle());
+    }
+
+    public void setTitle(CharSequence title) {
+        baseTitleTV.setText(title);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+    }
+
+}
