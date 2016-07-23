@@ -2,16 +2,17 @@ package com.example.jimmy.cornalarmclock.ui.home;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.widget.RelativeLayout;
 
 import com.example.jimmy.cornalarmclock.R;
 import com.example.jimmy.cornalarmclock.components.BaseActivity;
 import com.example.jimmy.cornalarmclock.components.BaseFragmentAdapter;
 import com.example.jimmy.cornalarmclock.components.ContentView;
 import com.example.jimmy.cornalarmclock.model.TabItem;
-import com.example.jimmy.cornalarmclock.ui.fragment.AlarmFragment;
-import com.example.jimmy.cornalarmclock.ui.fragment.ContactsFragment;
-import com.example.jimmy.cornalarmclock.ui.fragment.DiscoverFragment;
-import com.example.jimmy.cornalarmclock.ui.fragment.ProfileFragment;
+import com.example.jimmy.cornalarmclock.ui.alarm.AlarmFragment;
+import com.example.jimmy.cornalarmclock.ui.more.MoreFragment;
+import com.example.jimmy.cornalarmclock.ui.note.NoteFragment;
+import com.example.jimmy.cornalarmclock.ui.weather.WeatherFragment;
 import com.example.jimmy.cornalarmclock.widget.TabLayout;
 
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
     protected TabLayout mTabLayout;
     @Bind(R.id.viewpager)
     protected ViewPager mViewPager;
+    @Bind(R.id.rl_activity_home)
+    protected RelativeLayout relativeLayout;
 
     ArrayList<TabItem> tabs;
 
@@ -32,15 +35,23 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initData();
+
+        //设置导航栏透明
+        barUtil.setStatusBarTranslucent(relativeLayout, this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     private void initData() {
 
         tabs = new ArrayList<>();
         tabs.add(new TabItem(R.drawable.select_tab_clock, R.string.title_alarm, AlarmFragment.class));
-        tabs.add(new TabItem(R.drawable.selelct_tab_weather, R.string.title_weather, ContactsFragment.class));
-        tabs.add(new TabItem(R.drawable.select_tab_time, R.string.title_time, DiscoverFragment.class));
-        tabs.add(new TabItem(R.drawable.select_tab_more, R.string.title_more, ProfileFragment.class));
+        tabs.add(new TabItem(R.drawable.selelct_tab_weather, R.string.title_weather, WeatherFragment.class));
+        tabs.add(new TabItem(R.drawable.select_tab_time, R.string.title_note, NoteFragment.class));
+        tabs.add(new TabItem(R.drawable.select_tab_more, R.string.title_more, MoreFragment.class));
 
         mTabLayout.initData(tabs, this);
         mTabLayout.setCurrentTab(0);

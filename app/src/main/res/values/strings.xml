@@ -3,6 +3,6 @@
 
     <string name="title_alarm">闹钟</string>
     <string name="title_weather">天气</string>
-    <string name="title_time">计时</string>
+    <string name="title_note">笔记</string>
     <string name="title_more">更多</string>
 </resources>

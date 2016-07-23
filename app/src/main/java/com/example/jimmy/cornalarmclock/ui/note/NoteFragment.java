@@ -1,4 +1,4 @@
-package com.example.jimmy.cornalarmclock.ui.fragment;
+package com.example.jimmy.cornalarmclock.ui.note;
 
 import android.os.Bundle;
 import android.view.View;
@@ -7,24 +7,14 @@ import com.example.jimmy.cornalarmclock.model.Title;
 import com.example.jimmy.cornalarmclock.ui.home.BaseCornFragment;
 
 /**
- * Created by Jimmy on 16/7/7.
+ * Created by Jimmy on 16/7/23.
  */
-public class AlarmFragment extends BaseCornFragment {
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+public class NoteFragment extends BaseCornFragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setTitle(new Title("玉米闹钟", 0, 0));
+        setTitle(new Title("玉米笔记", 0, 0));
     }
 
     @Override
@@ -41,5 +31,4 @@ public class AlarmFragment extends BaseCornFragment {
     protected void clickRight() {
 
     }
-
 }

@@ -1,13 +1,15 @@
-package com.example.jimmy.cornalarmclock.ui.fragment;
+package com.example.jimmy.cornalarmclock.ui.alarm;
 
 import android.os.Bundle;
+import android.view.View;
 
+import com.example.jimmy.cornalarmclock.model.Title;
 import com.example.jimmy.cornalarmclock.ui.home.BaseCornFragment;
 
 /**
- * Created by yx on 16/4/3.
+ * Created by Jimmy on 16/7/7.
  */
-public class WechatFragment extends BaseCornFragment {
+public class AlarmFragment extends BaseCornFragment {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -17,6 +19,12 @@ public class WechatFragment extends BaseCornFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setTitle(new Title("玉米闹钟", 0, 0));
     }
 
     @Override

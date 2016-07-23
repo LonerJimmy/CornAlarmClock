@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.jimmy.cornalarmclock.R;
 import com.example.jimmy.cornalarmclock.util.ActivityStack;
+import com.example.jimmy.cornalarmclock.util.StatusBarUtil;
 
 import butterknife.ButterKnife;
 
@@ -23,6 +24,7 @@ public class BaseActivity extends AppCompatActivity {
     protected Application mApplication;
     protected LinearLayout baseToolbar;
     protected TextView baseTitleTV;
+    public StatusBarUtil barUtil = StatusBarUtil.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
