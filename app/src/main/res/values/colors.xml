@@ -8,6 +8,8 @@
     <!-- 白色 -->
     <color name="white">#ffffff</color>
 
-    <color name="transparent">#00000000</color>
+    <color name="transparent">#00000000</color>]
+
+    <color name="grey_deep">#3D3D3D</color>
 
 </resources>

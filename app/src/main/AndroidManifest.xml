@@ -9,6 +9,7 @@
         <activity
             android:name=".ui.home.HomeActivity"
             android:label="玉米闹钟"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

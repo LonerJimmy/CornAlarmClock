@@ -54,12 +54,12 @@ public abstract class BaseCornFragment extends BaseFragment implements View.OnCl
     public void setTitle(Title title) {
         llTitle.setVisibility(View.VISIBLE);
         tvTitle.setText(title.title);
-        if (title.leftView == 0) {
+        if (title.leftView != 0) {
             imgLeft.setVisibility(View.VISIBLE);
             imgLeft.setImageResource(title.leftView);
             imgLeft.setOnClickListener(this);
         }
-        if (title.rightView == 0) {
+        if (title.rightView != 0) {
             imgRight.setVisibility(View.VISIBLE);
             imgRight.setImageResource(title.rightView);
             imgLeft.setOnClickListener(this);
