@@ -1,21 +1,13 @@
 package com.example.jimmy.cornalarmclock.ui.fragment;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import com.example.jimmy.cornalarmclock.R;
-import com.example.jimmy.cornalarmclock.components.BaseFragment;
+import com.example.jimmy.cornalarmclock.ui.home.BaseCornFragment;
 
 /**
  * Created by yx on 16/4/3.
  */
-public class WechatFragment extends BaseFragment implements ITabClickListener {
-    @Override
-    public void fetchData() {
-
-    }
+public class WechatFragment extends BaseCornFragment {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -28,18 +20,18 @@ public class WechatFragment extends BaseFragment implements ITabClickListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.wechat_layout, container, false);
-        return view;
+    protected int getContent() {
+        return 0;
     }
 
     @Override
-    public void onMenuItemClick() {
+    protected void clickLeft() {
 
     }
 
     @Override
-    public BaseFragment getFragment() {
-        return this;
+    protected void clickRight() {
+
     }
+
 }

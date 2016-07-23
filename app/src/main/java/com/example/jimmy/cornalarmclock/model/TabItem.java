@@ -1,6 +1,6 @@
 package com.example.jimmy.cornalarmclock.model;
 
-import com.example.jimmy.cornalarmclock.components.BaseFragment;
+import com.example.jimmy.cornalarmclock.ui.home.BaseCornFragment;
 
 /**
  * Created by yx on 16/4/3.
@@ -17,7 +17,7 @@ public class TabItem {
     public int lableResId;
 
 
-    public Class<? extends BaseFragment> tagFragmentClz;
+    public Class<? extends BaseCornFragment> tagFragmentClz;
 
     public TabItem(int imageResId, int lableResId) {
         this.imageResId = imageResId;
@@ -25,7 +25,7 @@ public class TabItem {
     }
 
 
-    public TabItem(int imageResId, int lableResId, Class<? extends BaseFragment> tagFragmentClz) {
+    public TabItem(int imageResId, int lableResId, Class<? extends BaseCornFragment> tagFragmentClz) {
         this.imageResId = imageResId;
         this.lableResId = lableResId;
         this.tagFragmentClz = tagFragmentClz;

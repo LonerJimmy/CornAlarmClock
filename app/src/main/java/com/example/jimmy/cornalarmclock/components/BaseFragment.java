@@ -1,39 +1,76 @@
 package com.example.jimmy.cornalarmclock.components;
 
+import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import butterknife.ButterKnife;
 
 /**
- * Created by yx on 16/4/3.
+ * Created by james on 27/10/15.
  */
-public abstract class BaseFragment extends Fragment {
-
-    protected boolean isViewInitiated;
-    protected boolean isVisibleToUser;
-    protected boolean isDataInitiated;
-
+public class BaseFragment extends Fragment {
+    protected Activity activity;
+    protected Application okApplication;
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        this.isVisibleToUser = isVisibleToUser;
-        prepareFetchData();
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        activity = this.getActivity();
+        okApplication = activity.getApplication();
     }
 
-    public abstract void fetchData();
-
-    public boolean prepareFetchData() {
-        return prepareFetchData(false);
-    }
-
-    public boolean prepareFetchData(boolean forceUpdate) {
-        if (isVisibleToUser && isViewInitiated && (!isDataInitiated || forceUpdate)) {
-            fetchData();
-            isDataInitiated = true;
-            return true;
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (getLayoutId() == 0) {
+            return super.onCreateView(inflater, container, savedInstanceState);
+        } else {
+            return LayoutInflater.from(getActivity()).inflate(getLayoutId(), null);
         }
-        return false;
     }
 
+    protected int getLayoutId() {
+        for (Class c = getClass(); c != Context.class; c = c.getSuperclass()) {
+            ContentView annotation = (ContentView) c.getAnnotation(ContentView.class);
+            if (annotation != null) {
+                return annotation.value();
+            }
+        }
+        return 0;
+    }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this, view);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    protected void startActivity(Class<? extends Activity> clazz) {
+        Intent intent = new Intent(activity, clazz);
+        startActivity(intent);
+    }
+
+    public boolean isActivityFinishing() {
+        return activity == null || activity.isFinishing();
+    }
 
 }
