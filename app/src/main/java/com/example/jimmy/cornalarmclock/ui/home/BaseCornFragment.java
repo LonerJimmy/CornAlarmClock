@@ -39,6 +39,7 @@ public abstract class BaseCornFragment extends BaseFragment implements View.OnCl
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (getContent() != 0) {
+
             View content;
             content = LayoutInflater.from(getActivity()).inflate(getContent(), null);
             llContent.addView(content);
