@@ -25,4 +25,9 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.android.support:recyclerview-v7:23.2.0'
+    compile 'jp.wasabeef:recyclerview-animators:2.0.1'
+    compile 'xiaofei.library:android-data-storage:1.2.0'
+    compile 'xiaofei.library:comparator-generator:1.1'
+    compile 'de.greenrobot:eventbus:2.4.0'
 }

@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.jimmy.cornalarmclock.util.AndroidEventBus;
+
 import butterknife.ButterKnife;
 
 /**
@@ -19,12 +21,15 @@ import butterknife.ButterKnife;
 public class BaseFragment extends Fragment {
     protected Activity activity;
     protected Application okApplication;
+    protected AndroidEventBus mEventBus;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = this.getActivity();
         okApplication = activity.getApplication();
+        mEventBus = AndroidEventBus.getDefault();
+        mEventBus.register(this);
     }
 
     @Nullable
@@ -59,9 +64,15 @@ public class BaseFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
+    //EventBus至少有一个onEvent方法
+    public void onEvent(String defaultEvent) {
+
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mEventBus.unregister(this);
     }
 
     protected void startActivity(Class<? extends Activity> clazz) {

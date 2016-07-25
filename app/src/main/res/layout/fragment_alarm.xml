@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.example.jimmy.cornalarmclock.widget.MultiStateView
+        android:id="@+id/fragment_multi_state_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.example.jimmy.cornalarmclock.widget.RecycleViewWithHeaderAndFooter
+            android:id="@+id/alarm_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:background="@color/transparent"
+            android:divider="@android:color/transparent"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical" />
+    </com.example.jimmy.cornalarmclock.widget.MultiStateView>
+</LinearLayout>

@@ -31,6 +31,8 @@ public abstract class BaseCornFragment extends BaseFragment implements View.OnCl
     @Bind(R.id.txt_title)
     protected TextView tvTitle;
 
+    protected View content;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +40,11 @@ public abstract class BaseCornFragment extends BaseFragment implements View.OnCl
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (getContent() != 0) {
+        addView();
+    }
 
-            View content;
+    protected void addView() {
+        if (getContent() != 0) {
             content = LayoutInflater.from(getActivity()).inflate(getContent(), null);
             llContent.addView(content);
         }
