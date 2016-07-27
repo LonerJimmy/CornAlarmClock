@@ -5,9 +5,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.example.jimmy.cornalarmclock.R;
+import com.example.jimmy.cornalarmclock.components.BaseCornFragment;
 import com.example.jimmy.cornalarmclock.model.Alarm;
 import com.example.jimmy.cornalarmclock.model.Title;
-import com.example.jimmy.cornalarmclock.ui.home.BaseCornFragment;
+import com.example.jimmy.cornalarmclock.ui.activity.NewClockActivity;
 import com.example.jimmy.cornalarmclock.util.DbManager;
 import com.example.jimmy.cornalarmclock.widget.MultiStateView;
 import com.example.jimmy.cornalarmclock.widget.RecycleViewWithHeaderAndFooter;
@@ -40,6 +41,8 @@ public class AlarmFragment extends BaseCornFragment {
         initList();
 
         updateAlarmList(dbManager.getAlarmInfos());
+
+        setListenr();
     }
 
     private void updateAlarmList(List<Alarm> list) {
@@ -84,7 +87,7 @@ public class AlarmFragment extends BaseCornFragment {
 
     @Override
     protected void clickRight() {
-
+        startActivity(NewClockActivity.class);
     }
 
 }

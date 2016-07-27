@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.jimmy.cornalarmclock.model.TabItem;
-import com.example.jimmy.cornalarmclock.ui.home.BaseCornFragment;
 
 import java.util.ArrayList;
 

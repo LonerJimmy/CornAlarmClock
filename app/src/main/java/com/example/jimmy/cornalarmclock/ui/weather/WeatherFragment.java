@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.jimmy.cornalarmclock.model.Title;
-import com.example.jimmy.cornalarmclock.ui.home.BaseCornFragment;
+import com.example.jimmy.cornalarmclock.components.BaseCornFragment;
 
 /**
  * Created by Jimmy on 16/7/23.

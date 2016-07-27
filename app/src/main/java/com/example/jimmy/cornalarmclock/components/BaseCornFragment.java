@@ -1,4 +1,4 @@
-package com.example.jimmy.cornalarmclock.ui.home;
+package com.example.jimmy.cornalarmclock.components;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,8 +8,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.jimmy.cornalarmclock.R;
-import com.example.jimmy.cornalarmclock.components.BaseFragment;
-import com.example.jimmy.cornalarmclock.components.ContentView;
 import com.example.jimmy.cornalarmclock.model.Title;
 
 import butterknife.Bind;
@@ -62,12 +60,19 @@ public abstract class BaseCornFragment extends BaseFragment implements View.OnCl
         if (title.leftView != 0) {
             imgLeft.setVisibility(View.VISIBLE);
             imgLeft.setImageResource(title.leftView);
-            imgLeft.setOnClickListener(this);
         }
         if (title.rightView != 0) {
             imgRight.setVisibility(View.VISIBLE);
             imgRight.setImageResource(title.rightView);
+        }
+    }
+
+    public void setListenr() {
+        if (imgLeft != null) {
             imgLeft.setOnClickListener(this);
+        }
+        if (imgRight != null) {
+            imgRight.setOnClickListener(this);
         }
     }
 

@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.jimmy.cornalarmclock.R;
 import com.example.jimmy.cornalarmclock.util.ActivityStack;
@@ -22,8 +21,6 @@ import butterknife.ButterKnife;
 public class BaseActivity extends AppCompatActivity {
 
     protected Application mApplication;
-    protected LinearLayout baseToolbar;
-    protected TextView baseTitleTV;
     public StatusBarUtil barUtil = StatusBarUtil.getInstance();
 
     @Override
@@ -54,16 +51,6 @@ public class BaseActivity extends AppCompatActivity {
             }
         }
 
-    }
-
-    private void initActionBar() {
-        baseToolbar = (LinearLayout) findViewById(R.id.toolbar_base);
-        baseTitleTV = (TextView) findViewById(R.id.txt_base);
-        baseTitleTV.setText(getTitle());
-    }
-
-    public void setTitle(CharSequence title) {
-        baseTitleTV.setText(title);
     }
 
     @Override

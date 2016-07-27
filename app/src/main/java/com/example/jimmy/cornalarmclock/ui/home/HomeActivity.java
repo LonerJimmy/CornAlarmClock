@@ -34,10 +34,10 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initData();
 
         //设置导航栏透明
         barUtil.setStatusBarTranslucent(relativeLayout, this);
+        initData();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.example.jimmy.cornalarmclock.ui.more;
 
-import com.example.jimmy.cornalarmclock.ui.home.BaseCornFragment;
+import com.example.jimmy.cornalarmclock.components.BaseCornFragment;
 
 /**
  * Created by Jimmy on 16/7/23.
