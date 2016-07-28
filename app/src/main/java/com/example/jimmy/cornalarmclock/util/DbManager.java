@@ -1,12 +1,15 @@
 package com.example.jimmy.cornalarmclock.util;
 
+import android.text.TextUtils;
+
 import com.example.jimmy.cornalarmclock.context.AppApplication;
-import com.example.jimmy.cornalarmclock.model.Alarm;
+import com.example.jimmy.cornalarmclock.model.AlarmClock;
 
 import java.util.List;
 
 import xiaofei.library.datastorage.DataStorageFactory;
 import xiaofei.library.datastorage.IDataStorage;
+import xiaofei.library.datastorage.util.Condition;
 
 /**
  * Created by Jimmy on 16/4/1.
@@ -31,20 +34,37 @@ public class DbManager {
         return dbUtil;
     }
 
-    public List<Alarm> getAlarmInfos() {
-        return iDataStorage.loadAll(Alarm.class);
+    public AlarmClock getAlarm(final String id) {
+        List<AlarmClock> orderInfos = iDataStorage.load(AlarmClock.class, new Condition<AlarmClock>() {
+            @Override
+            public boolean satisfy(AlarmClock o) {
+                return TextUtils.equals(id, o.getId());
+            }
+        });
+        if (orderInfos != null && orderInfos.size() > 0) {
+            return orderInfos.get(0);
+        }
+        return null;
     }
 
-    public void saveOrUpdate(List<Alarm> newOrders) {
-        iDataStorage.storeOrUpdate(newOrders);
+    public List<AlarmClock> getAlarmInfos() {
+        return iDataStorage.loadAll(AlarmClock.class);
     }
 
-    public void clearOrder(Alarm order) {
-        iDataStorage.delete(order);
+    public void saveOrUpdate(List<AlarmClock> alarmClocks) {
+        iDataStorage.storeOrUpdate(alarmClocks);
     }
 
-    public void saveOrUpdate(Alarm order) {
-        iDataStorage.storeOrUpdate(order);
+    public void clearOrder(AlarmClock alarmClock) {
+        iDataStorage.delete(alarmClock);
+    }
+
+    public void clearAll() {
+        iDataStorage.deleteAll(AlarmClock.class);
+    }
+
+    public void saveOrUpdate(AlarmClock alarmClock) {
+        iDataStorage.storeOrUpdate(alarmClock);
     }
 
 }

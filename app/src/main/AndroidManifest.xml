@@ -22,7 +22,7 @@
             android:name=".ui.activity.NewClockActivity"
             android:label="玉米闹钟"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Transparent.holo"></activity>
     </application>
 
 </manifest>

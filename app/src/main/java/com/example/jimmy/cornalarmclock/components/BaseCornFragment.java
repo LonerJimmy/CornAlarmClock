@@ -3,6 +3,7 @@ package com.example.jimmy.cornalarmclock.components;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,7 +45,7 @@ public abstract class BaseCornFragment extends BaseFragment implements View.OnCl
     protected void addView() {
         if (getContent() != 0) {
             content = LayoutInflater.from(getActivity()).inflate(getContent(), null);
-            llContent.addView(content);
+            llContent.addView(content, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         }
     }
 

@@ -1,12 +1,13 @@
 package com.example.jimmy.cornalarmclock.ui.alarm;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.example.jimmy.cornalarmclock.R;
 import com.example.jimmy.cornalarmclock.components.BaseCornFragment;
-import com.example.jimmy.cornalarmclock.model.Alarm;
+import com.example.jimmy.cornalarmclock.model.AlarmClock;
 import com.example.jimmy.cornalarmclock.model.Title;
 import com.example.jimmy.cornalarmclock.ui.activity.NewClockActivity;
 import com.example.jimmy.cornalarmclock.util.DbManager;
@@ -45,7 +46,13 @@ public class AlarmFragment extends BaseCornFragment {
         setListenr();
     }
 
-    private void updateAlarmList(List<Alarm> list) {
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateAlarmList(dbManager.getAlarmInfos());
+    }
+
+    private void updateAlarmList(List<AlarmClock> list) {
         if (list == null) {
             return;
         }
@@ -87,7 +94,10 @@ public class AlarmFragment extends BaseCornFragment {
 
     @Override
     protected void clickRight() {
-        startActivity(NewClockActivity.class);
+        Intent intent = new Intent();
+        intent.putExtra("count", alarmAdapter.getItemCount());
+        intent.setClass(getActivity(), NewClockActivity.class);
+        startActivity(intent);
     }
 
 }

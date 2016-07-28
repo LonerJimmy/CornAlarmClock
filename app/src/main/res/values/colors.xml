@@ -1,17 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <!--主题色-->
-    <color name="theme">#008AF1</color>
+
+    <color name="navigation_bar">#008AF1</color>
+
+    <color name="tab_indicator">#80C3F6</color>
+
+    <color name="orange_text">#FF5E1C</color>
+    <!-- 背景色 -->
+    <color name="background">#eeeeee</color>
+    <!-- 背景色 -->
+    <color name="vid_background">#F3F3F3</color>
     <!-- 白色 -->
     <color name="white">#ffffff</color>
+    <!-- 黑色 -->
+    <color name="black">#666666</color>
+    <!-- 雅黑色 -->
+    <color name="black_grace">#333333</color>
+    <!-- 红色 -->
+    <color name="red">#e51c23</color>
+    <color name="red_word">#FF5E1C</color>
+    <!-- 红色 -->
+    <color name="red_light">#FFD8D8</color>
+    <!-- 黑色 -->
+    <color name="black_dialog">#030303</color>
+    <!-- 灰色 -->
+    <color name="grey_dialog">#797979</color>
+    <!-- 粉红色 -->
+    <color name="pink">#e91e63</color>
+    <color name="pink_new">#FFD8D8</color>
+    <!-- 透明 -->
+    <color name="transparent">#00000000</color>
+    <!-- 透明 -->
+    <color name="black_light">#000000</color>
+    <!-- 紫色 -->
+    <color name="purple">#9c27b0</color>
+    <!-- 深紫色 -->
+    <color name="purple_deep">#673ab7</color>
+    <!-- 靛蓝色 -->
+    <color name="indigo">#3f51b5</color>
+    <!-- 蓝色 -->
+    <color name="blue">#008AF1</color>
 
-    <color name="transparent">#00000000</color>]
+    <!-- 蓝色 -->
+    <color name="blue_unclick">#7CC4FA</color>
 
-    <color name="grey_deep">#3D3D3D</color>
+    <!-- 深蓝色 -->
+    <color name="blue_dark">#4183d7</color>
+    <!-- 亮蓝色 -->
+    <color name="blue_light">#03a9f4</color>
+    <!-- 蓝绿色 -->
+    <color name="cyan">#00bcd4</color>
+    <!-- 青色 -->
+    <color name="teal">#009688</color>
+    <!-- 绿色 -->
+    <color name="green">#259b24</color>
+    <!-- 浅绿色 -->
+    <color name="green_qian">#6dc97c</color>
+    <!-- 亮绿色 -->
+    <color name="green_light">#8bc34a</color>
+    <!-- 绿黄色 -->
+    <color name="lime">#cddc39</color>
+    <!-- 黄色 -->
+    <color name="yellow">#ffeb3b</color>
+    <!-- 琥珀色 -->
+    <color name="amber">#ffc107</color>
+    <!-- 橙色 -->
+    <color name="orange">#ff9800</color>
+    <!-- 深橙色 -->
+    <color name="orange_deep">#ff5722</color>
 
+    <color name="grey_fetch">#A9A9A9</color>
+    <!-- 棕色 -->
+    <color name="brown">#795548</color>
+    <!-- 灰色 -->
+    <color name="grey">#9e9e9e</color>
+    <!-- 深灰色 -->
+    <color name="grey_fetch_deep">#3D3D3D</color>
+    <!-- 深灰色 -->
+    <color name="grey_deep">#424242</color>
+    <!-- 蓝灰色 -->
+    <color name="grey_blue">#607d8b</color>
+    <color name="grey_qu">#999999</color>
+    <color name="grey_address">#666666</color>
+    <!-- 浅灰色 -->
     <color name="grey_line">#cccccc</color>
+    <color name="blur_transparent">#9000</color>
 
+    <!-- 半透明白 -->
+    <color name="transparent_white">#33ffffff</color>
+
+    <!--深蓝-->
+    <color name="blue_black">#008AF1</color>
+
+    <!--浅灰-->
+    <color name="grey_light">#cccccc</color>
+
+    <!--%60 透明白-->
+    <color name="transparent_white_dark">#99ffffff</color>
+
+    <!--%50透明白-->
+    <color name="transparent_white_half">#7fffffff</color>
+
+    <!--%50透明黑-->
+    <color name="transparent_black_half">#7f000000</color>
+
+    <!--深灰色-->
+    <color name="grey_dark">#666666</color>
+
+    <!--主题色-->
+    <color name="theme">#008AF1</color>
+
+    <!-- 控件的选中颜色 -->
+    <color name="control_accent">#008AF1</color>
+    <!-- 控件的默认颜色 -->
+    <color name="control_normal">#CBCBCF</color>
+
+    <!--图片裁剪-->
+    <color name="crop__button_bar">#f3f3f3</color>
+    <color name="crop__button_text">#666666</color>
+    <color name="crop__selector_pressed">#1a000000</color>
+    <color name="crop__selector_focused">#77000000</color>
+
+    //浅蓝
+    <color name="little_blue">#DFF1FF</color>
 </resources>

@@ -1,5 +1,31 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="text_comm_padding">12dp</dimen>
+
+    <!-- 分割线大小 -->
+    <dimen name="divider_size">1px</dimen>
+
+    <!--文字大小-->
+    <dimen name="font_small">12sp</dimen>
+    <dimen name="font_normal">15sp</dimen>
+    <dimen name="font_large">18sp</dimen>
+    <dimen name="font_larger">22sp</dimen>
+
+    <!-- 间距 -->
+    <dimen name="spacing_zero">0dp</dimen>
+    <dimen name="spacing_fetch_left">14.5dp</dimen>
+    <dimen name="spacing_fetch_right">14dp</dimen>
+    <dimen name="spacing_micro">4dp</dimen>
+    <dimen name="spacing_minor">8dp</dimen>
+    <dimen name="spacing_major">15dp</dimen>
+    <dimen name="spacing_massive">24dp</dimen>
+    <dimen name="space_size">2dp</dimen>
+
+    <dimen name="padding_top_bottom">10dp</dimen>
+    <dimen name="padding_left_right">15dp</dimen>
+
+    <dimen name="take_orders_item_space">8dp</dimen>
+
+    <dimen name="image_size">120dp</dimen>
+    <dimen name="folder_cover_size">72dp</dimen>
+
 </resources>

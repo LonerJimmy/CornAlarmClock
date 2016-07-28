@@ -12,7 +12,7 @@
         <item name="android:screenOrientation">portrait</item>
     </style>
 
-    <style name="ThemeOverlay.AppCompat.ActionBar" parent="Base.ThemeOverlay.AppCompat.ActionBar"/>
+    <style name="ThemeOverlay.AppCompat.ActionBar" parent="Base.ThemeOverlay.AppCompat.ActionBar" />
 
     <!-- ToolBar -->
     <style name="ToolBarStyle" parent="ThemeOverlay.AppCompat.ActionBar">
@@ -29,6 +29,11 @@
         <item name="android:background">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="Transparent.holo" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:screenOrientation">portrait</item>
     </style>
 
 </resources>

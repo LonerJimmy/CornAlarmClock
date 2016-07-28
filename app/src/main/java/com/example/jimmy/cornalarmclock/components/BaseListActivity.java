@@ -3,12 +3,13 @@ package com.example.jimmy.cornalarmclock.components;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.example.jimmy.cornalarmclock.R;
+import com.example.jimmy.cornalarmclock.model.AlarmClock;
 import com.example.jimmy.cornalarmclock.model.Title;
 import com.example.jimmy.cornalarmclock.util.StatusBarUtil;
 import com.example.jimmy.cornalarmclock.widget.MultiStateView;
@@ -27,8 +28,8 @@ public abstract class BaseListActivity extends BaseActivity implements View.OnCl
     protected ImageView imgRight;
     @Bind(R.id.img_left)
     protected ImageView imgLeft;
-    @Bind(R.id.txt_title)
-    protected TextView txtTitle;
+    @Bind(R.id.edit_title)
+    protected EditText editTitle;
     @Bind(R.id.layout_bottom)
     protected LinearLayout llBottom;
     @Bind(R.id.content_container)
@@ -38,6 +39,7 @@ public abstract class BaseListActivity extends BaseActivity implements View.OnCl
 
     protected View content;
     public StatusBarUtil barUtil = StatusBarUtil.getInstance();
+    protected AlarmClock alarmClock = new AlarmClock();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,6 @@ public abstract class BaseListActivity extends BaseActivity implements View.OnCl
 
     public void setTitle(Title title) {
         llTop.setVisibility(View.VISIBLE);
-        txtTitle.setText(title.title);
         if (title.leftView != 0) {
             imgLeft.setVisibility(View.VISIBLE);
             imgLeft.setImageResource(title.leftView);
@@ -85,7 +86,7 @@ public abstract class BaseListActivity extends BaseActivity implements View.OnCl
             imgLeft.setOnClickListener(this);
         }
         if (imgRight != null) {
-            imgLeft.setOnClickListener(this);
+            imgRight.setOnClickListener(this);
         }
     }
 

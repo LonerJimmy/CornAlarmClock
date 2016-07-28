@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.example.jimmy.cornalarmclock.R;
 import com.example.jimmy.cornalarmclock.components.BaseRecyclerViewHolder;
-import com.example.jimmy.cornalarmclock.model.Alarm;
+import com.example.jimmy.cornalarmclock.model.AlarmClock;
 
 import butterknife.Bind;
 
@@ -33,8 +33,9 @@ public class AlarmViewHolder extends BaseRecyclerViewHolder implements MViewHold
     }
 
     @Override
-    public void bindView(Alarm alarm) {
-        timeView.setText(Long.toString(alarm.getTime()));
-        titleView.setText(alarm.getTitle());
+    public void bindView(AlarmClock alarm) {
+        timeView.setText(Integer.toString(alarm.getHour()) + ":" + Integer.toString(alarm.getMinute()));
+        titleView.setText(alarm.getTag());
+        dateView.setText(alarm.getRepeat());
     }
 }

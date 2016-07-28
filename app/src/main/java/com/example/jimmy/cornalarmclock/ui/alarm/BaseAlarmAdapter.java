@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.jimmy.cornalarmclock.components.BaseRecyclerAdapter;
-import com.example.jimmy.cornalarmclock.model.Alarm;
+import com.example.jimmy.cornalarmclock.model.AlarmClock;
 import com.example.jimmy.cornalarmclock.ui.alarm.viewholder.AlarmViewHolder;
 import com.example.jimmy.cornalarmclock.ui.alarm.viewholder.MViewHolder;
 import com.example.jimmy.cornalarmclock.widget.RecycleViewWithHeaderAndFooter;
@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by caolicheng on 15/8/5.
  */
-public class BaseAlarmAdapter extends BaseRecyclerAdapter<Alarm> {
+public class BaseAlarmAdapter extends BaseRecyclerAdapter<AlarmClock> {
     private LayoutInflater layoutInflater;
 
     public BaseAlarmAdapter(Context context, RecycleViewWithHeaderAndFooter recycleViewWithHeaderAndFooter) {
@@ -37,7 +37,7 @@ public class BaseAlarmAdapter extends BaseRecyclerAdapter<Alarm> {
         }
     }
 
-    public void notifyDataSetChanged(List<Alarm> orderlist) {
+    public void notifyDataSetChanged(List<AlarmClock> orderlist) {
         putData(orderlist);
     }
 

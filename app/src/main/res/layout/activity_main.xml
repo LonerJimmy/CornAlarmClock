@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rl_activity_home"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/wallpaper_0"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <FrameLayout
-        android:id="@+id/fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/tab_layout"
-        android:visibility="gone" />
+    android:layout_height="match_parent"
+    android:background="@drawable/wallpaper_0">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/tab_layout" />
+        android:layout_height="match_parent" />
 
     <com.example.jimmy.cornalarmclock.widget.TabLayout
         android:id="@+id/tab_layout"
