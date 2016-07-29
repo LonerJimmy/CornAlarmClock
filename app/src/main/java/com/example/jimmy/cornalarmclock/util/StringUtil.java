@@ -34,6 +34,10 @@ public class StringUtil {
         return result.toString();
     }
 
+    public static boolean isBlank(String str) {
+        return str == null || "".equals(str.trim());
+    }
+
     public static String listDateToString(List<Date> dateList) {
         if (dateList == null) {
             return null;

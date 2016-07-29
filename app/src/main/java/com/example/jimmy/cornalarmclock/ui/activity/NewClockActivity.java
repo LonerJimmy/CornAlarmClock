@@ -7,7 +7,6 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import com.example.jimmy.cornalarmclock.R;
 import com.example.jimmy.cornalarmclock.components.BaseListActivity;
@@ -18,6 +17,7 @@ import com.example.jimmy.cornalarmclock.ui.alarm.GridViewAdapter;
 import com.example.jimmy.cornalarmclock.util.DbManager;
 import com.example.jimmy.cornalarmclock.util.StringUtil;
 import com.example.jimmy.cornalarmclock.widget.MultiStateView;
+import com.example.jimmy.cornalarmclock.widget.PickerView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,7 +28,8 @@ import java.util.List;
  */
 public class NewClockActivity extends BaseListActivity implements GridViewAdapter.OnGridClickListener {
 
-    private TimePicker timePicker;
+    private PickerView hourPicker;
+    private PickerView minutePicker;
     private GridView gridView;
     private GridViewAdapter gridViewAdapter;
     private SeekBar volumeSeekBar;
@@ -56,15 +57,8 @@ public class NewClockActivity extends BaseListActivity implements GridViewAdapte
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        count = getIntent().getIntExtra("count", 0);
-        if (DbManager.getInstance().getAlarm(Integer.toString(count)) != null) {
-            alarmClock = DbManager.getInstance().getAlarm(Integer.toString(count));
-        }
-        alarmClock.setId(Integer.toString(count + 1));
-
-        setTitle(new Title("新建闹钟", R.drawable.ic_action_cancel, R.drawable.ic_action_accept));
-        multiContainer.setState(MultiStateView.STATE_CONTENT);
-
+        //其它初始化
+        initOther();
         //初始化时间选择
         initTimeSelect();
         //初始化重复
@@ -76,6 +70,19 @@ public class NewClockActivity extends BaseListActivity implements GridViewAdapte
         //初始化振动
         initVibrate();
 
+    }
+
+    private void initOther() {
+        count = getIntent().getIntExtra("count", 0);
+//        if (DbManager.getInstance().getAlarm(Integer.toString(count - 1)) != null) {
+//            alarmClock = DbManager.getInstance().getAlarm(Integer.toString(count));
+//        }
+        alarmClock.setId(Integer.toString(count));
+        alarmClock.setOnOff(true);
+        alarmClock.setTag(AlarmConstants.TAG_DEFAULT);
+
+        setTitle(new Title("新建闹钟", R.drawable.ic_action_cancel, R.drawable.ic_action_accept));
+        multiContainer.setState(MultiStateView.STATE_CONTENT);
     }
 
     @Override
@@ -107,31 +114,43 @@ public class NewClockActivity extends BaseListActivity implements GridViewAdapte
 
     private void initTimeSelect() {
         // 下次响铃提示
-        timePicker = (TimePicker) content.findViewById(R.id.time_picker);
+        hourPicker = (PickerView) content.findViewById(R.id.pv_hour);
+        minutePicker = (PickerView) content.findViewById(R.id.pv_minute);
 
-        timePicker.setCurrentHour(AlarmConstants.HOUR_DEFAULT);
-        timePicker.setCurrentMinute(AlarmConstants.MINUTE_DEAFULT);
-
-        // 初始化闹钟实例的小时
-        alarmClock.setHour(AlarmConstants.HOUR_DEFAULT);
-        // 初始化闹钟实例的分钟
-        alarmClock.setMinute(AlarmConstants.MINUTE_DEAFULT);
-
-        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+        List<String> data = new ArrayList<String>();
+        List<String> seconds = new ArrayList<String>();
+        for (int i = 0; i < 24; i++) {
+            data.add(i < 10 ? "0" + i : "" + i);
+        }
+        for (int i = 0; i < 60; i++) {
+            seconds.add(i < 10 ? "0" + i : "" + i);
+        }
+        hourPicker.setData(data);
+        hourPicker.setOnSelectListener(new PickerView.OnSelectListener() {
 
             @Override
-            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                // 保存闹钟实例的小时
-                alarmClock.setHour(hourOfDay);
-                // 保存闹钟实例的分钟
-                alarmClock.setMinute(minute);
-
+            public void onSelect(String text) {
+                if (text != null) {
+                    alarmClock.setHour(Integer.parseInt(text));
+                }
             }
-
         });
+        minutePicker.setData(seconds);
+        minutePicker.setOnSelectListener(new PickerView.OnSelectListener() {
+
+            @Override
+            public void onSelect(String text) {
+                alarmClock.setMinute(Integer.parseInt(text));
+            }
+        });
+        hourPicker.setSelected(0);
+        alarmClock.setHour(0);
+        alarmClock.setMinute(30);
+
     }
 
     private void initRepeat() {
+        alarmClock.setRepeat(AlarmConstants.REPEAT_DEFAULT);
         gridView = (GridView) content.findViewById(R.id.grid_repeat);
         selectDateText = (TextView) content.findViewById(R.id.txt_repeat);
         gridViewAdapter = new GridViewAdapter(this, list, this);
@@ -177,7 +196,9 @@ public class NewClockActivity extends BaseListActivity implements GridViewAdapte
 
     @Override
     public void clickRight() {
-        alarmClock.setTag(editTitle.getText().toString());
+        if (!StringUtil.isBlank(editTitle.getText().toString())) {
+            alarmClock.setTag(editTitle.getText().toString());
+        }
         DbManager.getInstance().saveOrUpdate(alarmClock);
         this.finish();
     }

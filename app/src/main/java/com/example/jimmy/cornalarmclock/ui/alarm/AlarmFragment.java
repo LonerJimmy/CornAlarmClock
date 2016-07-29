@@ -89,7 +89,8 @@ public class AlarmFragment extends BaseCornFragment {
 
     @Override
     protected void clickLeft() {
-
+        DbManager.getInstance().clearAll();
+        updateAlarmList(dbManager.getAlarmInfos());
     }
 
     @Override

@@ -18,13 +18,45 @@
             android:background="@drawable/bg_corner_white"
             android:orientation="vertical">
 
-            <TimePicker
-                android:id="@+id/time_picker"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="2dp"
-                android:layout_marginTop="2dp" />
+                android:background="#ffffff"
+                android:gravity="center">
+
+                <com.example.jimmy.cornalarmclock.widget.PickerView
+                    android:id="@+id/pv_hour"
+                    android:layout_width="80dp"
+                    android:layout_height="160dp" />
+
+                <TextView
+                    android:id="@+id/tv_hour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/pv_hour"
+                    android:text="时"
+                    android:textColor="@color/grey"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+
+                <com.example.jimmy.cornalarmclock.widget.PickerView
+                    android:id="@+id/pv_minute"
+                    android:layout_width="80dp"
+                    android:layout_height="160dp"
+                    android:layout_toRightOf="@id/tv_hour" />
+
+                <TextView
+                    android:id="@+id/tv_minute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/pv_minute"
+                    android:text="分"
+                    android:textColor="@color/grey"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout

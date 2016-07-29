@@ -15,4 +15,8 @@ public class AlarmConstants {
     public static String RING_DEFAULT = "默认铃声";
     //默认振动
     public static boolean VIBRATE_DEFAULT = true;
+    //默认振动
+    public static String REPEAT_DEFAULT = "只响一次";
+    //默认振动
+    public static String TAG_DEFAULT = "新建闹钟";
 }

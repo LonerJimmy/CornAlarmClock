@@ -37,5 +37,6 @@ public class AlarmViewHolder extends BaseRecyclerViewHolder implements MViewHold
         timeView.setText(Integer.toString(alarm.getHour()) + ":" + Integer.toString(alarm.getMinute()));
         titleView.setText(alarm.getTag());
         dateView.setText(alarm.getRepeat());
+        mSwitch.setChecked(alarm.isOnOff());
     }
 }
