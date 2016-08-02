@@ -1,11 +1,6 @@
 package com.example.jimmy.cornalarmclock.util;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
-import android.os.SystemClock;
 
 /**
  * Created by Jimmy on 16/7/29.
