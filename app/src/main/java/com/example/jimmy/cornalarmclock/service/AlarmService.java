@@ -29,15 +29,15 @@ import java.util.List;
 
 public class AlarmService extends Service {
 
-    private static final String LOG_TAG = "AlarmService";
+//    private static final String LOG_TAG = "AlarmService";
 
-    /**
-     * 定时唤醒的时间间隔，5分钟
-     */
-    private final static int ALARM_INTERVAL = 5 * 60 * 1000;
-    private final static int WAKE_REQUEST_CODE = 6666;
+//    /**
+//     * 定时唤醒的时间间隔，5分钟
+//     */
+//    private final static int ALARM_INTERVAL = 5 * 60 * 1000;
+//    private final static int WAKE_REQUEST_CODE = 6666;
 
-    private final static int GRAY_SERVICE_ID = -1001;
+    private final int GRAY_SERVICE_ID = -1001;
 
     @Override
     public void onCreate() {
@@ -115,7 +115,7 @@ public class AlarmService extends Service {
     /**
      * 给 API >= 18 的平台上用的灰色保活手段
      */
-    public static class DaemonInnerService extends Service {
+    public class DaemonInnerService extends Service {
 
         @Override
         public void onCreate() {
