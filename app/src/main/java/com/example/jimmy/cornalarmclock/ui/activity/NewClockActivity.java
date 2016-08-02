@@ -1,5 +1,7 @@
 package com.example.jimmy.cornalarmclock.ui.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.jimmy.cornalarmclock.R;
+import com.example.jimmy.cornalarmclock.broadcast.AlarmClockBroadcast;
 import com.example.jimmy.cornalarmclock.components.BaseListActivity;
 import com.example.jimmy.cornalarmclock.constant.AlarmConstants;
 import com.example.jimmy.cornalarmclock.model.Date;
@@ -200,7 +203,52 @@ public class NewClockActivity extends BaseListActivity implements GridViewAdapte
             alarmClock.setTag(editTitle.getText().toString());
         }
         DbManager.getInstance().saveOrUpdate(alarmClock);
-        this.finish();
+
+        Intent data = new Intent(this, AlarmClockBroadcast.class);
+        setResult(Activity.RESULT_OK, data);
+        drawAnimation();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+//        switch (requestCode) {
+//            // 铃声选择界面返回
+//            case REQUEST_RING_SELECT:
+//                // 铃声名
+//                String name = data.getStringExtra(WeacConstants.RING_NAME);
+//                // 铃声地址
+//                String url = data.getStringExtra(WeacConstants.RING_URL);
+//                // 铃声界面
+//                int ringPager = data.getIntExtra(WeacConstants.RING_PAGER, 0);
+//
+//                mRingDescribe.setText(name);
+//
+//                mAlarmClock.setRingName(name);
+//                mAlarmClock.setRingUrl(url);
+//                mAlarmClock.setRingPager(ringPager);
+//                break;
+//            // 小睡编辑界面返回
+//            case REQUEST_NAP_EDIT:
+//                // 小睡间隔
+//                int napInterval = data.getIntExtra(WeacConstants.NAP_INTERVAL, 10);
+//                // 小睡次数
+//                int napTimes = data.getIntExtra(WeacConstants.NAP_TIMES, 3);
+//                mAlarmClock.setNapInterval(napInterval);
+//                mAlarmClock.setNapTimes(napTimes);
+//                break;
+//        }
+    }
+
+    /**
+     * 结束新建闹钟界面时开启渐变缩小效果动画
+     */
+    private void drawAnimation() {
+        finish();
+        overridePendingTransition(0, R.anim.zoomout);
     }
 
     @Override

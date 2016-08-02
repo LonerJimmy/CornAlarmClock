@@ -19,4 +19,9 @@ public class AlarmConstants {
     public static String REPEAT_DEFAULT = "只响一次";
     //默认振动
     public static String TAG_DEFAULT = "新建闹钟";
+
+    /**
+     * 保存的AlarmClock单例
+     */
+    public static final String ALARM_CLOCK = "alarm_clock";
 }
