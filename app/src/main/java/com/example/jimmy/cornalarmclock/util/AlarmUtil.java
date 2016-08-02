@@ -1,22 +1,25 @@
 package com.example.jimmy.cornalarmclock.util;
 
-import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
+import android.util.Log;
 
-import com.example.jimmy.cornalarmclock.broadcast.AlarmClockBroadcast;
+import com.example.jimmy.cornalarmclock.broadcast.AlarmReciver;
 import com.example.jimmy.cornalarmclock.constant.AlarmConstants;
 import com.example.jimmy.cornalarmclock.model.AlarmClock;
 
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Jimmy on 16/7/29.
  */
 public class AlarmUtil {
+
     private static AlarmUtil ourInstance = new AlarmUtil();
 
     public static AlarmUtil getInstance() {
@@ -26,108 +29,59 @@ public class AlarmUtil {
     private AlarmUtil() {
     }
 
-    /**
-     * 开启倒计时
-     *
-     * @param context    context
-     * @param timeRemain 剩余时间
-     */
-    public static void startAlarmTimer(Context context, long timeRemain) {
-//        Intent intent = new Intent(context, TimerOnTimeActivity.class);
-//        PendingIntent pi = PendingIntent.getActivity(context,
-//                1000, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//        AlarmManager alarmManager = (AlarmManager) context
-//                .getSystemService(Context.ALARM_SERVICE);
-//        long countdownTime = timeRemain + SystemClock.elapsedRealtime();
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, countdownTime, pi);
-//        } else {
-//            alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, countdownTime, pi);
-//        }
-    }
-
-    @TargetApi(19)
-    public static void startAlarmClock(Context context, AlarmClock alarmClock) {
-        Intent intent = new Intent(context, AlarmClockBroadcast.class);
-        intent.putExtra(AlarmConstants.ALARM_CLOCK, alarmClock);
-        // FLAG_UPDATE_CURRENT：如果PendingIntent已经存在，保留它并且只替换它的extra数据。
-        // FLAG_CANCEL_CURRENT：如果PendingIntent已经存在，那么当前的PendingIntent会取消掉，然后产生一个新的PendingIntent。
-        PendingIntent pi = PendingIntent.getBroadcast(context,
-                Integer.parseInt(alarmClock.getId()), intent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) context
-                .getSystemService(Context.ALARM_SERVICE);
-
-        // 取得下次响铃时间
-        long nextTime = calculateNextTime(alarmClock.getHour(),
-                alarmClock.getMinute(), alarmClock.getWeeks());
-        // 设置闹钟
-        // 当前版本为19（4.4）或以上使用精准闹钟
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, nextTime, pi);
-        } else {
-            alarmManager.set(AlarmManager.RTC_WAKEUP, nextTime, pi);
+    public void turnAlarm(Context context, AlarmClock alarmInfo) {
+        if (alarmInfo == null) {
+            Log.d("alarm", "传入AlarmInfo不为空");
         }
 
+        AlarmManager mAlamManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AlarmReciver.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(AlarmConstants.ALARM_CLOCK, alarmInfo);
+        intent.putExtras(bundle);
+        intent.setAction(AlarmConstants.RECEIVER_ACTION);
+        intent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+        //每个闹钟不同的pi
+        PendingIntent pi = PendingIntent.getBroadcast(context, Integer.parseInt(alarmInfo.getId()), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        if (alarmInfo.isOnOff()) {
+            startAlarm(mAlamManager, alarmInfo, pi);
+        } else {
+            cancelAlarm(intent, context);
+        }
     }
 
-    /**
-     * 取得下次响铃时间
-     *
-     * @param hour   小时
-     * @param minute 分钟
-     * @param weeks  周
-     * @return 下次响铃时间
-     */
-    public static long calculateNextTime(int hour, int minute, String weeks) {
-        // 当前系统时间
-        long now = System.currentTimeMillis();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(now);
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, minute);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        // 下次响铃时间
-        long nextTime = calendar.getTimeInMillis();
-        // 当单次响铃时
-        if (weeks == null) {
-            // 当设置时间大于系统时间时
-            if (nextTime > now) {
-                return nextTime;
+    private void cancelAlarm(Intent intent, Context context) {
+        Log.d("alarm", "取消闹钟");
+        intent.putExtra("cancel", true);
+        context.sendBroadcast(intent);
+    }
+
+    public void startAlarm(AlarmManager mAlamManager, AlarmClock alarmInfo, PendingIntent pi) {
+        Log.d("alarm", "启动闹钟");
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.HOUR_OF_DAY, alarmInfo.getHour());
+        c.set(Calendar.MINUTE, alarmInfo.getMinute());
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+        //  Log.d("alarm", "当前系统版本" + Build.VERSION.SDK_INT);
+        if (c.getTimeInMillis() < System.currentTimeMillis()) {
+            if (Build.VERSION.SDK_INT >= 19) {
+                mAlamManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 24 * 60 * 60 * 1000, pi);
             } else {
-                // 设置的时间加一天
-                calendar.add(Calendar.DAY_OF_MONTH, 1);
-                nextTime = calendar.getTimeInMillis();
-                return nextTime;
+                mAlamManager.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 24 * 60 * 60 * 1000, pi);
             }
         } else {
-            nextTime = 0;
-            // 临时比较用响铃时间
-            long tempTime;
-            // 取得响铃重复周期
-            final String[] weeksValue = weeks.split(",");
-            for (String aWeeksValue : weeksValue) {
-                int week = Integer.parseInt(aWeeksValue);
-                // 设置重复的周
-                calendar.set(Calendar.DAY_OF_WEEK, week);
-                tempTime = calendar.getTimeInMillis();
-                // 当设置时间小于等于当前系统时间时
-                if (tempTime <= now) {
-                    // 设置时间加7天
-                    tempTime += AlarmManager.INTERVAL_DAY * 7;
-                }
-
-                if (nextTime == 0) {
-                    nextTime = tempTime;
-                } else {
-                    // 比较取得最小时间为下次响铃时间
-                    nextTime = Math.min(tempTime, nextTime);
-                }
-
+            if (Build.VERSION.SDK_INT >= 19) {
+                Log.d("alarm", "执行定时任务");
+                Date date = c.getTime();
+                Log.d("alarm", "定时的时间是" + date.toString());
+                mAlamManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pi);
+            } else {
+                mAlamManager.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pi);
             }
-
-            return nextTime;
         }
+
     }
+
 }

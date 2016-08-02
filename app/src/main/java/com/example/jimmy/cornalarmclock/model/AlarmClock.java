@@ -3,6 +3,9 @@ package com.example.jimmy.cornalarmclock.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import xiaofei.library.datastorage.annotation.ClassId;
 import xiaofei.library.datastorage.annotation.ObjectId;
 
@@ -168,6 +171,18 @@ public class AlarmClock implements Parcelable {
 
     public void setOnOff(boolean onOff) {
         this.onOff = onOff;
+    }
+
+    public static List<Integer> getWeekDay(AlarmClock alarmClock) {
+        final String[] weeksValue = alarmClock.getRepeat().split(",");
+        List<Integer> result = new ArrayList<>();
+        if (alarmClock != null) {
+            for (String aWeeksValue : weeksValue) {
+                int week = Integer.parseInt(aWeeksValue);
+                result.add(week);
+            }
+        }
+        return result;
     }
 
     public AlarmClock() {

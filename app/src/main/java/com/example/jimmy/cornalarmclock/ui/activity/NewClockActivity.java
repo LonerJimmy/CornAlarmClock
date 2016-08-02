@@ -11,12 +11,12 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.jimmy.cornalarmclock.R;
-import com.example.jimmy.cornalarmclock.broadcast.AlarmClockBroadcast;
 import com.example.jimmy.cornalarmclock.components.BaseListActivity;
 import com.example.jimmy.cornalarmclock.constant.AlarmConstants;
 import com.example.jimmy.cornalarmclock.model.Date;
 import com.example.jimmy.cornalarmclock.model.Title;
 import com.example.jimmy.cornalarmclock.ui.alarm.GridViewAdapter;
+import com.example.jimmy.cornalarmclock.util.AlarmUtil;
 import com.example.jimmy.cornalarmclock.util.DbManager;
 import com.example.jimmy.cornalarmclock.util.StringUtil;
 import com.example.jimmy.cornalarmclock.widget.MultiStateView;
@@ -204,9 +204,8 @@ public class NewClockActivity extends BaseListActivity implements GridViewAdapte
         }
         DbManager.getInstance().saveOrUpdate(alarmClock);
 
-        Intent data = new Intent(this, AlarmClockBroadcast.class);
-        setResult(Activity.RESULT_OK, data);
-        drawAnimation();
+        AlarmUtil.getInstance().turnAlarm(this, alarmClock);
+        finish();
     }
 
     @Override

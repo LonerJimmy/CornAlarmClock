@@ -10,7 +10,7 @@ import com.example.jimmy.cornalarmclock.components.BaseActivity;
 import com.example.jimmy.cornalarmclock.components.BaseFragmentAdapter;
 import com.example.jimmy.cornalarmclock.components.ContentView;
 import com.example.jimmy.cornalarmclock.model.TabItem;
-import com.example.jimmy.cornalarmclock.service.AlarmService;
+import com.example.jimmy.cornalarmclock.service.WakeServiceOne;
 import com.example.jimmy.cornalarmclock.ui.alarm.AlarmFragment;
 import com.example.jimmy.cornalarmclock.ui.more.MoreFragment;
 import com.example.jimmy.cornalarmclock.ui.note.NoteFragment;
@@ -40,7 +40,8 @@ public class HomeActivity extends BaseActivity implements TabLayout.OnTabClickLi
         //设置导航栏透明
         barUtil.setStatusBarTranslucent(relativeLayout, this);
         initData();
-        startService(new Intent(this, AlarmService.class));
+
+        startService(new Intent(this, WakeServiceOne.class));
     }
 
     @Override

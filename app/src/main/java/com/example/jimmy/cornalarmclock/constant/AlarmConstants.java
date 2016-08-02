@@ -24,4 +24,6 @@ public class AlarmConstants {
      * 保存的AlarmClock单例
      */
     public static final String ALARM_CLOCK = "alarm_clock";
+
+    public static final String RECEIVER_ACTION = "com.example.jimmy.cornalarmclock";
 }
